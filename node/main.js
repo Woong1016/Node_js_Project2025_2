@@ -1,15 +1,15 @@
-let express = require ('express');
+let express = require('express');
 let app = express();
 
-app.get ('/' , function(req, res){
-    res.send('Hello world');
+app.get('/' , function(req , res){
+res.send('Hello world');
 });
 
-app.get ('/about' , function(req, res){
-    res.send('Woong server');
-});
-app.listen(3000 , function(){
-console.log('listening on port 3000');
-
+app.get('/about' , function(req ,res){
+    res.send('Player data Woong');
 });
 
+app.listen(3000, function (){
+
+    console.log('listening on port 3000');
+});
