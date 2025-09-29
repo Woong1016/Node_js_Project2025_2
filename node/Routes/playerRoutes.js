@@ -25,7 +25,7 @@ router.post('/regitster' , (req,res) =>{
         playerName :name,
         password : password,
         resources :{
-            playerName :player.playerName,
+           
             metal : 500,
             srystal : 300,
             deuterium : 100
