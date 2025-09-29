@@ -5,7 +5,7 @@ const app = express();
 const port = 4000;              //포트 4000번대
 
 app.use(express.json());   //json 통신 설정
-app.use('/api' , palyerRoutes);        // API 라우트 설정
+app.use('/api', palyerRoutes);        // API 라우트 설정
 const resourceFilePath = 'resources.json';              //자원 저장  파일 경로
 
 
@@ -24,7 +24,7 @@ function loadResources()
 }
 function saveResources()
 {
-    fs.writeFileSync(resourceFilePath, JSON.stringify(global.palyers, null ,2))
+    fs.writeFileSync(resourceFilePath, JSON.stringify(global.palyers, null ,2));
 }
 
 app.listen(port , ()=>

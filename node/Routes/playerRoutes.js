@@ -1,13 +1,14 @@
 const express = require('express');
 const fs = require('fs');
-const { platform } = require('os');
+ //const { platform } = require('os');
 const router = express.Router();
 
+const resourceFilePath = 'resources.json';
 
 const initalResources = {
     metal : 500,
     crystal : 300 ,
-    deuterirum : 100,
+    deuterium : 100,
 }
 
 global.players = {};
@@ -21,12 +22,13 @@ router.post('/regitster' , (req,res) =>{
 
 
     global.players[name] = {
-        playersname :name,
+        playerName :name,
         password : password,
         resources :{
+            playerName :player.playerName,
             metal : 500,
             srystal : 300,
-            deuterirum : 100
+            deuterium : 100
         },
         planets:[]
 
@@ -35,6 +37,7 @@ router.post('/regitster' , (req,res) =>{
     res.send({message : '등록완료' ,player:name});
 
 })
+//return.post('/login' , (req, res) => {})
 
 router.post('/login' , (req,res) =>{
     const {name , password }= req.body;
@@ -47,14 +50,21 @@ router.post('/login' , (req,res) =>{
         return res.status(401).send({message : '비밀번호가 틀렸습니다'});
     }
 
-    const requirePayLoad = {
-        playerName : player.playersname,
+    const player = global.players[name];
+
+    const reqponsePayLoad = {
+        playerName : player.playerName,
         metal : player.resources.metal,
         crystal : player.resources.crystal,
-        deuterirum : player.resources.deuterirum
+        deuterium : player.resources.deuterium
     }
 
     console.log("Login response playLoad : " , reqponsePayLoad);
-    res.send(requirePayLoad);
+    res.send(reqponsePayLoad);
 });
+
+function saveResources()
+{
+    fs.writeFileSync(resourceFilePath, JSON.stringify(global.palyers, null ,2))
+}
 module.exports =router;
