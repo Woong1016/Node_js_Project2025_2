@@ -8,8 +8,8 @@ app.use(express.json());   //json 통신 설정
 app.use('/api', palyerRoutes);        // API 라우트 설정
 const resourceFilePath = 'resources.json';              //자원 저장  파일 경로
 
-
-function loadResources()
+loadResource(); 
+function loadResource()
 {
     if(fs.existsSync(resourceFilePath))             //파일경로를 확인해서 파일이 있는지 확인
     {

@@ -1,49 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-
-    public Gameview gameview;
+    public GameView gameView;
     public PlayerModel playerModel;
-    private GameApi gameApi;
-    // Start is called before the first frame update
+    private GameAPI gameAPI;
+
     void Start()
     {
-        gameApi = gameObject.AddComponent<GameApi>();
-        gameview.SetRegisterButtonListener(OnRegisterButtonClicked);
-        gameview.SetLoginButtonListener(OnLoginButtonClicked);
+        gameAPI = gameObject.AddComponent<GameAPI>();
+        gameView.SetRegisterButtonListener(OnRegisterButtonClicked);
+        gameView.SetLoginButtonListener(OnLoginButtonClicked);
     }
+
     public void OnRegisterButtonClicked()
     {
-        string playerName = gameview.platerNameInput.text;
-        StartCoroutine(gameApi.RegitsterPlayer(playerName, "1234"));
+        string playerName = gameView.playerNameInput.text;
+        StartCoroutine(gameAPI.RegisterPlayer(playerName, "1234"));                     //예시 (유저 이름과 비번)
     }
+
     public void OnLoginButtonClicked()
     {
-        string playerName = gameview.platerNameInput.text;
+        string playerName = gameView.playerNameInput.text;
+        StartCoroutine(LoginPlayerCoroutine(playerName, "1234"));                     //예시 (유저 이름과 비번)
+    }
 
-    }
-    private IEnumerator LoginPlayerCoroutine(string playername , string password)
+    private IEnumerator LoginPlayerCoroutine(string playerName, string password)
     {
-        yield return gameApi.LoginPlayer(playername, password, player =>
-            {
-                playerModel = player;
-                UpdateResourcesDisplay();
-            });
+        yield return gameAPI.LoginPlayer(playerName, password, player =>
+        {
+            playerModel = player;
+            UpdateResourcesDisplay();
+        });
     }
+
     private void UpdateResourcesDisplay()
     {
-        if(playerModel !=null)
+        if (playerModel != null)
         {
-            gameview.UpdateResources(playerModel.metal, playerModel.crystal, playerModel.deuturium);
+            gameView.SetPlayerName(playerModel.playerName);
+            gameView.UpdateResources(playerModel.metal, playerModel.crystal, playerModel.deuteriurm);
         }
-
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

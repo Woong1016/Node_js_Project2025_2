@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class Gameview : MonoBehaviour
+public class GameView : MonoBehaviour
 {
-
+    
     public Text playerNameText;
     public Text metalText;
     public Text crystalText;
     public Text deuteriumText;
-    public InputField platerNameInput;
+    public InputField playerNameInput;
 
     public Button registerButton;
     public Button loginButton;
@@ -26,17 +25,19 @@ public class Gameview : MonoBehaviour
         playerNameText.text = name;
     }
 
-    public void UpdateResources(int metal , int crystal , int deuterium)
+    public void UpdateResources(int metal, int crystal, int deuterium)
     {
         metalText.text = $"Metal : {metal}";
-        crystalText.text = $"crystal : {crystal}";
-        deuteriumText.text = $"Deuterium : {deuterium}";
+        crystalText.text = $"Crystal : {crystal}";
+        deuteriumText.text = $"deuterium : {deuterium}";
     }
 
     public void UpdateProgressBar(float value)
     {
         progressBar.value = value;
     }
+
+    
 
     public void SetRegisterButtonListener(UnityAction action)
     {
@@ -50,26 +51,16 @@ public class Gameview : MonoBehaviour
         loginButton.onClick.AddListener(action);
     }
 
-    public void SetcollectButtonButtonListener(UnityAction action)
+    public void SetCollectButtonListener(UnityAction action)
     {
         collectButton.onClick.RemoveAllListeners();
         collectButton.onClick.AddListener(action);
     }
 
-    public void SetdevelopButtonButtonListener(UnityAction action)
+    public void SetDevelopButtonListener(UnityAction action)
     {
         developButton.onClick.RemoveAllListeners();
         developButton.onClick.AddListener(action);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

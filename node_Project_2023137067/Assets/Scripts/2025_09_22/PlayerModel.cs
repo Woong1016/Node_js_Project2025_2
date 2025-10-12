@@ -9,7 +9,7 @@ public class PlayerModel
     public string playerName;
     public int metal;
     public int crystal;
-    public int deuturium;
+    public int deuteriurm;
     public List<PlanetModel> planets;
 
     public PlayerModel(string name)
@@ -17,13 +17,13 @@ public class PlayerModel
         this.playerName = name;
          this.metal = 500;
         this.crystal = 300;
-        this.deuturium = 100;
+        this.deuteriurm = 100;
 
     }  
     public void CollectResources()
     {
         metal += 10;
         crystal += 5;
-        deuturium += 2;
+        deuteriurm += 2;
     }
 }
