@@ -125,6 +125,6 @@ JOIN quests q ON pq.quest_id = q.quest_id WHERE pq.player_id = 1
 
 -- 가장 많은 경험치를 주는 퀘스트 출력
 
-SELECT  title 
+SELECT  title , reward_exp FROM quests ORDER BY reward_exp DESC LIMIT 1
 
 
