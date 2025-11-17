@@ -95,3 +95,42 @@ const PORT = 3000;
 app.listen (PORT , ()=> {
     console.log(`서버 실행중 : ${PORT}`);
 })
+
+
+
+const WebSocket = require('ws');
+const iconv = require('iconv-lite');
+
+class GameServer{
+
+    constructor(port){
+        this.wss = new WebSocket.Server({port});
+        this.clients = new set();
+        this.player = new Map();
+        this.SetupServerEvent();
+        console.log(`게임 서버 포트 ${port}에서 시작 되었습니다`);
+    }
+}
+
+SetupServerEvent()
+{
+    this.wss.on('connection' , (socket) => {
+
+     this .clients . add(socket);
+     const playerId = this.generatePlayerId();
+
+     this.player.set(playerId , {
+        socket : socket,
+        position : {x: 0 , y : 0 , z: 0}
+
+     });
+     console.log(`클라이언트 접속 ID : ${playerID} 현재 접속자 : ${this.clients.size}`);
+
+     const welcomData = {
+        type : 'connection',
+        PlayerId : playerId,
+        message : '서버에 연결 되었습니다'
+     };
+     socket.send(JSON.stringify(welcomData));
+    });
+}
